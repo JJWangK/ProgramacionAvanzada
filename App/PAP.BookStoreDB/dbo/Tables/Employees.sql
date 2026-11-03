@@ -1,0 +1,28 @@
+CREATE TABLE [dbo].[Employees](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[FirstName] [nvarchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LastName] [nvarchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Email] [nvarchar](150) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PasswordHash] [nvarchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[CreatedAt] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_Employees_Email] UNIQUE NONCLUSTERED 
+(
+	[Email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[Employees] ADD CONSTRAINT [DF_Employees_IsActive] DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[Employees] ADD CONSTRAINT [DF_Employees_CreatedAt] DEFAULT (sysutcdatetime()) FOR [CreatedAt]
+GO
+ALTER TABLE [dbo].[Employees] ADD CONSTRAINT [FK_Employees_Roles] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([Id])
+GO
+ALTER TABLE [dbo].[Employees] CHECK CONSTRAINT [FK_Employees_Roles]

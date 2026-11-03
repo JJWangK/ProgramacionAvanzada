@@ -1,0 +1,31 @@
+﻿@model PAP.DataAccess.Category
+
+@{
+    ViewBag.Title = "Eliminar Categoría";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar Categoría</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar este registro?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+        <dt class="col-sm-3">Descripción</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

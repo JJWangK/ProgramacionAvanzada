@@ -1,0 +1,32 @@
+﻿@model PAP.DataAccess.Payment
+
+@{
+    ViewBag.Title = "Detalle Pago";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de Pago</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Pedido</dt>
+        <dd class="col-sm-9">@(Model.Order != null ? (object)Model.Order.Id : "-")</dd>
+        <dt class="col-sm-3">Método de pago</dt>
+        <dd class="col-sm-9">@Model.PaymentMethod</dd>
+        <dt class="col-sm-3">Monto</dt>
+        <dd class="col-sm-9">@Model.Amount.ToString("C")</dd>
+        <dt class="col-sm-3">Fecha de pago</dt>
+        <dd class="col-sm-9">@Model.PaymentDate.ToString("yyyy-MM-dd HH:mm")</dd>
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">@Model.Status</dd>
+        <dt class="col-sm-3">Referencia</dt>
+        <dd class="col-sm-9">@Model.TransactionRef</dd>
+    </dl>
+</main>

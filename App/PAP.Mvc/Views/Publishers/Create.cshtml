@@ -1,0 +1,46 @@
+﻿@model PAP.DataAccess.Publisher
+
+@{
+    ViewBag.Title = "Crear Editorial";
+}
+
+<main>
+    <h1 class="h2 mb-4">Crear Editorial</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        @Html.HiddenFor(m => m.CreatedAt)
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Name, "Nombre", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Country, "País", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Website, "Sitio web", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Website, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Email, "Correo", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

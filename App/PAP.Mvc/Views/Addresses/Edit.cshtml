@@ -1,0 +1,69 @@
+﻿@model PAP.DataAccess.Address
+
+@{
+    ViewBag.Title = "Editar Dirección";
+}
+
+<main>
+    <h1 class="h2 mb-4">Editar Dirección</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        @Html.HiddenFor(m => m.Id)
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.CustomerId, "Cliente", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.CustomerId, (SelectList)ViewBag.CustomerIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.CustomerId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.AddressType, "Tipo de dirección", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddressType, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.AddressType, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Street, "Calle", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Street, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Street, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.City, "Ciudad", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.State, "Provincia/Estado", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.PostalCode, "Código postal", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Country, "País", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-check mb-3">
+                @Html.CheckBoxFor(m => m.IsDefault, new { @class = "form-check-input" })
+                @Html.LabelFor(m => m.IsDefault, "Predeterminada", new { @class = "form-check-label" })
+            </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

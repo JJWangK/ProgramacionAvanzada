@@ -1,0 +1,35 @@
+﻿@model PAP.DataAccess.Address
+
+@{
+    ViewBag.Title = "Eliminar Dirección";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar Dirección</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar este registro?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Cliente</dt>
+        <dd class="col-sm-9">@(Model.Customer != null ? Model.Customer.Email : "-")</dd>
+        <dt class="col-sm-3">Tipo de dirección</dt>
+        <dd class="col-sm-9">@Model.AddressType</dd>
+        <dt class="col-sm-3">Calle</dt>
+        <dd class="col-sm-9">@Model.Street</dd>
+        <dt class="col-sm-3">Ciudad</dt>
+        <dd class="col-sm-9">@Model.City</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

@@ -1,0 +1,64 @@
+﻿@model PAP.DataAccess.Book
+
+@{
+    ViewBag.Title = "Detalle Libro";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de Libro</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+        <dt class="col-sm-3">Título</dt>
+        <dd class="col-sm-9">@Model.Title</dd>
+        <dt class="col-sm-3">Categoría</dt>
+        <dd class="col-sm-9">@(Model.Category1 != null ? Model.Category1.Name : (Model.Category ?? "-"))</dd>
+        <dt class="col-sm-3">Editorial</dt>
+        <dd class="col-sm-9">@(Model.Publisher1 != null ? Model.Publisher1.Name : (Model.Publisher ?? "-"))</dd>
+        <dt class="col-sm-3">Autor</dt>
+        <dd class="col-sm-9">@Model.Author</dd>
+        <dt class="col-sm-3">Descripción</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+        <dt class="col-sm-3">Fecha de publicación</dt>
+        <dd class="col-sm-9">@(Model.PublicationDate.HasValue ? Model.PublicationDate.Value.ToString("yyyy-MM-dd HH:mm") : "-")</dd>
+        <dt class="col-sm-3">Alto</dt>
+        <dd class="col-sm-9">@(Model.Height.HasValue ? Model.Height.Value.ToString("C") : "-")</dd>
+        <dt class="col-sm-3">Ancho</dt>
+        <dd class="col-sm-9">@(Model.Width.HasValue ? Model.Width.Value.ToString("C") : "-")</dd>
+        <dt class="col-sm-3">Precio</dt>
+        <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+        <dt class="col-sm-3">Más vendido</dt>
+        <dd class="col-sm-9">@(Model.IsBestSeller ? "Sí" : "No")</dd>
+        <dt class="col-sm-3">Género</dt>
+        <dd class="col-sm-9">@(Model.Genre1 != null ? Model.Genre1.Name : (Model.Genre ?? "-"))</dd>
+        <dt class="col-sm-3">En stock</dt>
+        <dd class="col-sm-9">@(Model.IsInStock ? "Sí" : "No")</dd>
+        <dt class="col-sm-3">Creado</dt>
+        <dd class="col-sm-9">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+        <dt class="col-sm-3">Actualizado</dt>
+        <dd class="col-sm-9">@Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+        <dt class="col-sm-3">Editorial</dt>
+        <dd class="col-sm-9">@(Model.Publisher1 != null ? Model.Publisher1.Name : "-")</dd>
+        <dt class="col-sm-3">Categoría</dt>
+        <dd class="col-sm-9">@(Model.Category1 != null ? Model.Category1.Name : "-")</dd>
+        <dt class="col-sm-3">Género</dt>
+        <dd class="col-sm-9">@(Model.Genre1 != null ? Model.Genre1.Name : "-")</dd>
+        <dt class="col-sm-3">ISBN</dt>
+        <dd class="col-sm-9">@Model.ISBN</dd>
+        <dt class="col-sm-3">Páginas</dt>
+        <dd class="col-sm-9">@(Model.Pages.HasValue ? Model.Pages.Value.ToString() : "-")</dd>
+        <dt class="col-sm-3">Idioma</dt>
+        <dd class="col-sm-9">@Model.Language</dd>
+        <dt class="col-sm-3">URL de portada</dt>
+        <dd class="col-sm-9">@Model.CoverImageUrl</dd>
+    </dl>
+</main>

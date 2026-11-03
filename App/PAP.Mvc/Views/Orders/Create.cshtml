@@ -1,0 +1,70 @@
+﻿@model PAP.DataAccess.Order
+
+@{
+    ViewBag.Title = "Crear Pedido";
+}
+
+<main>
+    <h1 class="h2 mb-4">Crear Pedido</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.CustomerId, "Cliente", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.CustomerId, (SelectList)ViewBag.CustomerIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.CustomerId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.ShippingAddressId, "Dirección de envío", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.ShippingAddressId, (SelectList)ViewBag.ShippingAddressIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.ShippingAddressId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.OrderDate, "Fecha del pedido", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.OrderDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local" })
+                @Html.ValidationMessageFor(m => m.OrderDate, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Status, "Estado", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Subtotal, "Subtotal", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Subtotal, new { @class = "form-control", type = "number", step = "0.01" })
+                @Html.ValidationMessageFor(m => m.Subtotal, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.TaxAmount, "Impuesto", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.TaxAmount, new { @class = "form-control", type = "number", step = "0.01" })
+                @Html.ValidationMessageFor(m => m.TaxAmount, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.ShippingCost, "Envío", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.ShippingCost, new { @class = "form-control", type = "number", step = "0.01" })
+                @Html.ValidationMessageFor(m => m.ShippingCost, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Notes, "Notas", new { @class = "form-label" })
+                @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", rows = 3 })
+                @Html.ValidationMessageFor(m => m.Notes, "", new { @class = "text-danger" })
+            </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

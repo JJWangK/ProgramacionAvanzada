@@ -1,0 +1,30 @@
+﻿@model PAP.DataAccess.PurchaseOrder
+
+@{
+    ViewBag.Title = "Detalle Orden de compra";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de Orden de compra</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Proveedor</dt>
+        <dd class="col-sm-9">@(Model.Supplier != null ? Model.Supplier.Name : "-")</dd>
+        <dt class="col-sm-3">Fecha del pedido</dt>
+        <dd class="col-sm-9">@Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</dd>
+        <dt class="col-sm-3">Fecha esperada</dt>
+        <dd class="col-sm-9">@(Model.ExpectedDate.HasValue ? Model.ExpectedDate.Value.ToString("yyyy-MM-dd HH:mm") : "-")</dd>
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">@Model.Status</dd>
+        <dt class="col-sm-3">Costo total</dt>
+        <dd class="col-sm-9">@Model.TotalCost.ToString("C")</dd>
+    </dl>
+</main>

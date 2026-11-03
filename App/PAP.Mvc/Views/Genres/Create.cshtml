@@ -1,0 +1,34 @@
+﻿@model PAP.DataAccess.Genre
+
+@{
+    ViewBag.Title = "Crear Género";
+}
+
+<main>
+    <h1 class="h2 mb-4">Crear Género</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Name, "Nombre", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Description, "Descripción", new { @class = "form-label" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 3 })
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+            </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

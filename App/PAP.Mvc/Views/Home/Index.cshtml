@@ -1,0 +1,83 @@
+﻿@model PAP.Mvc.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Inicio";
+
+    var grupos = new[]
+    {
+        new
+        {
+            Titulo = "Catálogo",
+            Modulos = new[]
+            {
+                new { Nombre = "Libros", Controlador = "Books", Clave = "Books" },
+                new { Nombre = "Autores", Controlador = "Authors", Clave = "Authors" },
+                new { Nombre = "Categorías", Controlador = "Categories", Clave = "Categories" },
+                new { Nombre = "Géneros", Controlador = "Genres", Clave = "Genres" },
+                new { Nombre = "Editoriales", Controlador = "Publishers", Clave = "Publishers" },
+                new { Nombre = "Libros y autores", Controlador = "BookAuthors", Clave = "BookAuthors" }
+            }
+        },
+        new
+        {
+            Titulo = "Clientes y ventas",
+            Modulos = new[]
+            {
+                new { Nombre = "Clientes", Controlador = "Customers", Clave = "Customers" },
+                new { Nombre = "Direcciones", Controlador = "Addresses", Clave = "Addresses" },
+                new { Nombre = "Carritos", Controlador = "ShoppingCarts", Clave = "ShoppingCarts" },
+                new { Nombre = "Ítems de carrito", Controlador = "CartItems", Clave = "CartItems" },
+                new { Nombre = "Pedidos", Controlador = "Orders", Clave = "Orders" },
+                new { Nombre = "Ítems de pedido", Controlador = "OrderItems", Clave = "OrderItems" },
+                new { Nombre = "Pagos", Controlador = "Payments", Clave = "Payments" },
+                new { Nombre = "Reseñas", Controlador = "Reviews", Clave = "Reviews" }
+            }
+        },
+        new
+        {
+            Titulo = "Compras e inventario",
+            Modulos = new[]
+            {
+                new { Nombre = "Proveedores", Controlador = "Suppliers", Clave = "Suppliers" },
+                new { Nombre = "Órdenes de compra", Controlador = "PurchaseOrders", Clave = "PurchaseOrders" },
+                new { Nombre = "Ítems de orden de compra", Controlador = "PurchaseOrderItems", Clave = "PurchaseOrderItems" },
+                new { Nombre = "Inventario", Controlador = "Inventory", Clave = "Inventory" }
+            }
+        },
+        new
+        {
+            Titulo = "Administración",
+            Modulos = new[]
+            {
+                new { Nombre = "Roles", Controlador = "Roles", Clave = "Roles" },
+                new { Nombre = "Empleados", Controlador = "Employees", Clave = "Employees" }
+            }
+        }
+    };
+}
+
+<div class="text-center py-4">
+    <h1 class="display-5">BookStore</h1>
+    <p class="lead mb-3">Sistema de administración de la librería: catálogo, clientes, ventas, compras e inventario.</p>
+    <a class="btn btn-primary btn-lg" href="@Url.Action("Index", "Admin")">Ir al panel Admin</a>
+</div>
+
+@foreach (var grupo in grupos)
+{
+    <div class="mb-4">
+        <h3 class="h5 border-bottom pb-2">@grupo.Titulo</h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-2">
+            @foreach (var modulo in grupo.Modulos)
+            {
+                <div class="col">
+                    <a class="card card-body h-100 text-decoration-none text-dark" href="@Url.Action("Index", modulo.Controlador)">
+                        <span class="fw-semibold">@modulo.Nombre</span>
+                        <span class="text-muted small">@Model.Totals[modulo.Clave] registro(s)</span>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<p class="text-muted small">
+</p>

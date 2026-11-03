@@ -1,0 +1,35 @@
+﻿@model PAP.DataAccess.Review
+
+@{
+    ViewBag.Title = "Eliminar Reseña";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar Reseña</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar este registro?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Libro</dt>
+        <dd class="col-sm-9">@(Model.Book != null ? Model.Book.Title : "-")</dd>
+        <dt class="col-sm-3">Cliente</dt>
+        <dd class="col-sm-9">@(Model.Customer != null ? Model.Customer.Email : "-")</dd>
+        <dt class="col-sm-3">Calificación</dt>
+        <dd class="col-sm-9">@Model.Rating</dd>
+        <dt class="col-sm-3">Comentario</dt>
+        <dd class="col-sm-9">@Model.Comment</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

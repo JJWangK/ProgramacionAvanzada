@@ -1,0 +1,35 @@
+﻿@model PAP.DataAccess.PurchaseOrder
+
+@{
+    ViewBag.Title = "Eliminar Orden de compra";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar Orden de compra</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar este registro?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Proveedor</dt>
+        <dd class="col-sm-9">@(Model.Supplier != null ? Model.Supplier.Name : "-")</dd>
+        <dt class="col-sm-3">Fecha del pedido</dt>
+        <dd class="col-sm-9">@Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</dd>
+        <dt class="col-sm-3">Fecha esperada</dt>
+        <dd class="col-sm-9">@(Model.ExpectedDate.HasValue ? Model.ExpectedDate.Value.ToString("yyyy-MM-dd HH:mm") : "-")</dd>
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">@Model.Status</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

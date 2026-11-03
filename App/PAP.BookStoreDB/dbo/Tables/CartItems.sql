@@ -1,0 +1,33 @@
+CREATE TABLE [dbo].[CartItems](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CartId] [int] NOT NULL,
+	[BookId] [int] NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[AddedAt] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_CartItems] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_CartItems_Cart_Book] UNIQUE NONCLUSTERED 
+(
+	[CartId] ASC,
+	[BookId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [DF_CartItems_Quantity] DEFAULT ((1)) FOR [Quantity]
+GO
+ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [DF_CartItems_AddedAt] DEFAULT (sysutcdatetime()) FOR [AddedAt]
+GO
+ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [FK_CartItems_Books] FOREIGN KEY([BookId])
+REFERENCES [dbo].[Books] ([Id])
+GO
+ALTER TABLE [dbo].[CartItems] CHECK CONSTRAINT [FK_CartItems_Books]
+GO
+ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [FK_CartItems_Carts] FOREIGN KEY([CartId])
+REFERENCES [dbo].[ShoppingCarts] ([Id])
+GO
+ALTER TABLE [dbo].[CartItems] CHECK CONSTRAINT [FK_CartItems_Carts]
+GO
+ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [CK_CartItems_Quantity] CHECK (([Quantity]>(0)))

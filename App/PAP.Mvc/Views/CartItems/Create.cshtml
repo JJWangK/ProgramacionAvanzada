@@ -1,0 +1,46 @@
+﻿@model PAP.DataAccess.CartItem
+
+@{
+    ViewBag.Title = "Crear Ítem de carrito";
+}
+
+<main>
+    <h1 class="h2 mb-4">Crear Ítem de carrito</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.CartId, "Carrito", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.CartId, (SelectList)ViewBag.CartIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.CartId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.BookId, "Libro", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.BookId, (SelectList)ViewBag.BookIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.BookId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Quantity, "Cantidad", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", type = "number", step = "1" })
+                @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.AddedAt, "Agregado", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.AddedAt, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local" })
+                @Html.ValidationMessageFor(m => m.AddedAt, "", new { @class = "text-danger" })
+            </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

@@ -1,0 +1,35 @@
+﻿@model PAP.DataAccess.Book
+
+@{
+    ViewBag.Title = "Eliminar Libro";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar Libro</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar este registro?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+        <dt class="col-sm-3">Título</dt>
+        <dd class="col-sm-9">@Model.Title</dd>
+        <dt class="col-sm-3">Categoría</dt>
+        <dd class="col-sm-9">@(Model.Category1 != null ? Model.Category1.Name : (Model.Category ?? "-"))</dd>
+        <dt class="col-sm-3">Editorial</dt>
+        <dd class="col-sm-9">@(Model.Publisher1 != null ? Model.Publisher1.Name : (Model.Publisher ?? "-"))</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

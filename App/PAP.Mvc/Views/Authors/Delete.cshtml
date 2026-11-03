@@ -1,0 +1,35 @@
+﻿@model PAP.DataAccess.Author
+
+@{
+    ViewBag.Title = "Eliminar Autor";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar Autor</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar este registro?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.FirstName</dd>
+        <dt class="col-sm-3">Apellido</dt>
+        <dd class="col-sm-9">@Model.LastName</dd>
+        <dt class="col-sm-3">Biografía</dt>
+        <dd class="col-sm-9">@Model.Biography</dd>
+        <dt class="col-sm-3">Fecha de nacimiento</dt>
+        <dd class="col-sm-9">@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("yyyy-MM-dd HH:mm") : "-")</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

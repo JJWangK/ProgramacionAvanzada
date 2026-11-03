@@ -1,0 +1,32 @@
+﻿@model PAP.DataAccess.Supplier
+
+@{
+    ViewBag.Title = "Detalle Proveedor";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de Proveedor</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+        <dt class="col-sm-3">Contacto</dt>
+        <dd class="col-sm-9">@Model.ContactName</dd>
+        <dt class="col-sm-3">Correo</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+        <dt class="col-sm-3">Teléfono</dt>
+        <dd class="col-sm-9">@Model.Phone</dd>
+        <dt class="col-sm-3">Dirección</dt>
+        <dd class="col-sm-9">@Model.Address</dd>
+        <dt class="col-sm-3">Activo</dt>
+        <dd class="col-sm-9">@(Model.IsActive ? "Sí" : "No")</dd>
+    </dl>
+</main>

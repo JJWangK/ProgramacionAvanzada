@@ -1,0 +1,123 @@
+﻿@model PAP.DataAccess.Book
+
+@{
+    ViewBag.Title = "Editar Libro";
+}
+
+<main>
+    <h1 class="h2 mb-4">Editar Libro</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.CreatedAt)
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Name, "Nombre", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Title, "Título", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Author, "Autor", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Author, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Description, "Descripción", new { @class = "form-label" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 3 })
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.PublicationDate, "Fecha de publicación", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.PublicationDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.PublicationDate, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Height, "Alto", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Height, new { @class = "form-control", type = "number", step = "0.01" })
+                @Html.ValidationMessageFor(m => m.Height, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Width, "Ancho", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Width, new { @class = "form-control", type = "number", step = "0.01" })
+                @Html.ValidationMessageFor(m => m.Width, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Price, "Precio", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "0.01" })
+                @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-check mb-3">
+                @Html.CheckBoxFor(m => m.IsBestSeller, new { @class = "form-check-input" })
+                @Html.LabelFor(m => m.IsBestSeller, "Más vendido", new { @class = "form-check-label" })
+            </div>
+
+            <div class="form-check mb-3">
+                @Html.CheckBoxFor(m => m.IsInStock, new { @class = "form-check-input" })
+                @Html.LabelFor(m => m.IsInStock, "En stock", new { @class = "form-check-label" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.PublisherId, "Editorial", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.PublisherId, (SelectList)ViewBag.PublisherIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.PublisherId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.CategoryId, "Categoría", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.CategoryIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.GenreId, "Género", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.GenreId, (SelectList)ViewBag.GenreIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.GenreId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.ISBN, "ISBN", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ISBN, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Pages, "Páginas", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Pages, new { @class = "form-control", type = "number", step = "1" })
+                @Html.ValidationMessageFor(m => m.Pages, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Language, "Idioma", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Language, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Language, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.CoverImageUrl, "URL de portada", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.CoverImageUrl, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CoverImageUrl, "", new { @class = "text-danger" })
+            </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

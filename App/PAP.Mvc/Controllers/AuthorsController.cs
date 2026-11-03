@@ -1,0 +1,139 @@
+﻿using PAP.Business;
+using PAP.DataAccess;
+using System;
+using System.Data.Entity.Infrastructure;
+using System.Net;
+using System.Web.Mvc;
+
+namespace PAP.Mvc.Controllers
+{
+    /// <summary>
+    /// Controlador de Autores.
+    /// </summary>
+    public class AuthorsController : Controller
+    {
+        private readonly AuthorsManager _manager;
+
+        public AuthorsController()
+        {
+            _manager = new AuthorsManager();
+
+        }
+
+        public ActionResult Index()
+        {
+            return View(_manager.GetAll());
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var entity = _manager.GetById(id.Value);
+            if (entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(entity);
+        }
+
+        public ActionResult Create()
+        {
+            var entity = new Author();
+            entity.CreatedAt = DateTime.Now;
+
+            return View(entity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Author entity)
+        {
+            if (string.IsNullOrWhiteSpace(entity.FirstName)) { ModelState.AddModelError("FirstName", "El campo Nombre es obligatorio."); }
+            if (string.IsNullOrWhiteSpace(entity.LastName)) { ModelState.AddModelError("LastName", "El campo Apellido es obligatorio."); }
+
+            if (!ModelState.IsValid)
+            {
+
+                return View(entity);
+            }
+
+            entity.CreatedAt = DateTime.Now;
+            _manager.Create(entity);
+            TempData["Mensaje"] = "Autor creado correctamente.";
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var entity = _manager.GetById(id.Value);
+            if (entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(entity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Author entity)
+        {
+            if (string.IsNullOrWhiteSpace(entity.FirstName)) { ModelState.AddModelError("FirstName", "El campo Nombre es obligatorio."); }
+            if (string.IsNullOrWhiteSpace(entity.LastName)) { ModelState.AddModelError("LastName", "El campo Apellido es obligatorio."); }
+
+            if (!ModelState.IsValid)
+            {
+
+                return View(entity);
+            }
+
+            _manager.Update(entity);
+            TempData["Mensaje"] = "Autor actualizado correctamente.";
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var entity = _manager.GetById(id.Value);
+            if (entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(entity);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _manager.Delete(id);
+                TempData["Mensaje"] = "Autor eliminado correctamente.";
+            }
+            catch (DbUpdateException)
+            {
+                TempData["Error"] = "No se puede eliminar porque tiene registros relacionados.";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+    }
+}

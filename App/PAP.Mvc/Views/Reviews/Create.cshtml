@@ -1,0 +1,46 @@
+﻿@model PAP.DataAccess.Review
+
+@{
+    ViewBag.Title = "Crear Reseña";
+}
+
+<main>
+    <h1 class="h2 mb-4">Crear Reseña</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        @Html.HiddenFor(m => m.CreatedAt)
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.BookId, "Libro", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.BookId, (SelectList)ViewBag.BookIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.BookId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.CustomerId, "Cliente", new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.CustomerId, (SelectList)ViewBag.CustomerIdList, "-- Seleccione --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.CustomerId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Rating, "Calificación", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Rating, new { @class = "form-control", type = "number", step = "1", min = "1", max = "5" })
+                @Html.ValidationMessageFor(m => m.Rating, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Comment, "Comentario", new { @class = "form-label" })
+                @Html.TextAreaFor(m => m.Comment, new { @class = "form-control", rows = 3 })
+                @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })
+            </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

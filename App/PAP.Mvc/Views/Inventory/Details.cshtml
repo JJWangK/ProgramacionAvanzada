@@ -1,0 +1,28 @@
+﻿@model PAP.DataAccess.Inventory
+
+@{
+    ViewBag.Title = "Detalle Inventario";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de Inventario</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Libro</dt>
+        <dd class="col-sm-9">@(Model.Book != null ? Model.Book.Title : "-")</dd>
+        <dt class="col-sm-3">Cantidad en stock</dt>
+        <dd class="col-sm-9">@Model.QuantityInStock</dd>
+        <dt class="col-sm-3">Nivel de reposición</dt>
+        <dd class="col-sm-9">@Model.ReorderLevel</dd>
+        <dt class="col-sm-3">Último reabastecimiento</dt>
+        <dd class="col-sm-9">@(Model.LastRestockedAt.HasValue ? Model.LastRestockedAt.Value.ToString("yyyy-MM-dd HH:mm") : "-")</dd>
+    </dl>
+</main>

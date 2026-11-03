@@ -1,0 +1,33 @@
+﻿@model PAP.Models.BookAuthor
+
+@{
+    ViewBag.Title = "Editar relación libro-autor";
+}
+
+<main>
+    <h1 class="h2 mb-4">Editar relación libro-autor</h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+        @Html.Hidden("oldBookId", (int)ViewBag.OldBookId)
+        @Html.Hidden("oldAuthorId", (int)ViewBag.OldAuthorId)
+        <div class="mb-3">
+            @Html.LabelFor(m => m.BookId, "Libro", new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.BookId, (SelectList)ViewBag.BookIdList, "-- Seleccione --", new { @class = "form-select" })
+            @Html.ValidationMessageFor(m => m.BookId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.AuthorId, "Autor", new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.AuthorId, (SelectList)ViewBag.AuthorIdList, "-- Seleccione --", new { @class = "form-select" })
+            @Html.ValidationMessageFor(m => m.AuthorId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</main>

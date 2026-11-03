@@ -1,0 +1,32 @@
+﻿@model PAP.DataAccess.Author
+
+@{
+    ViewBag.Title = "Detalle Autor";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de Autor</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Model.FirstName</dd>
+        <dt class="col-sm-3">Apellido</dt>
+        <dd class="col-sm-9">@Model.LastName</dd>
+        <dt class="col-sm-3">Biografía</dt>
+        <dd class="col-sm-9">@Model.Biography</dd>
+        <dt class="col-sm-3">Fecha de nacimiento</dt>
+        <dd class="col-sm-9">@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("yyyy-MM-dd HH:mm") : "-")</dd>
+        <dt class="col-sm-3">País</dt>
+        <dd class="col-sm-9">@Model.Country</dd>
+        <dt class="col-sm-3">Creado</dt>
+        <dd class="col-sm-9">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+    </dl>
+</main>

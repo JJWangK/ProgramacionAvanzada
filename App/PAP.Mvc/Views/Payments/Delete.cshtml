@@ -1,0 +1,35 @@
+﻿@model PAP.DataAccess.Payment
+
+@{
+    ViewBag.Title = "Eliminar Pago";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar Pago</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar este registro?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Pedido</dt>
+        <dd class="col-sm-9">@(Model.Order != null ? (object)Model.Order.Id : "-")</dd>
+        <dt class="col-sm-3">Método de pago</dt>
+        <dd class="col-sm-9">@Model.PaymentMethod</dd>
+        <dt class="col-sm-3">Monto</dt>
+        <dd class="col-sm-9">@Model.Amount.ToString("C")</dd>
+        <dt class="col-sm-3">Fecha de pago</dt>
+        <dd class="col-sm-9">@Model.PaymentDate.ToString("yyyy-MM-dd HH:mm")</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

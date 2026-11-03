@@ -1,0 +1,26 @@
+﻿@model PAP.Models.BookAuthor
+
+@{
+    ViewBag.Title = "Detalle relación libro-autor";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de relación libro-autor</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { bookId = Model.BookId, authorId = Model.AuthorId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Libro</dt>
+        <dd class="col-sm-9">@Model.BookTitle</dd>
+        <dt class="col-sm-3">Autor</dt>
+        <dd class="col-sm-9">@Model.AuthorName</dd>
+        <dt class="col-sm-3">Id del libro</dt>
+        <dd class="col-sm-9">@Model.BookId</dd>
+        <dt class="col-sm-3">Id del autor</dt>
+        <dd class="col-sm-9">@Model.AuthorId</dd>
+    </dl>
+</main>

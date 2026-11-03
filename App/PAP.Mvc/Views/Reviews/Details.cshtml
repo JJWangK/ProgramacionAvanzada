@@ -1,0 +1,30 @@
+﻿@model PAP.DataAccess.Review
+
+@{
+    ViewBag.Title = "Detalle Reseña";
+}
+
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 mb-0">Detalle de Reseña</h1>
+        <div>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+        <dt class="col-sm-3">Libro</dt>
+        <dd class="col-sm-9">@(Model.Book != null ? Model.Book.Title : "-")</dd>
+        <dt class="col-sm-3">Cliente</dt>
+        <dd class="col-sm-9">@(Model.Customer != null ? Model.Customer.Email : "-")</dd>
+        <dt class="col-sm-3">Calificación</dt>
+        <dd class="col-sm-9">@Model.Rating</dd>
+        <dt class="col-sm-3">Comentario</dt>
+        <dd class="col-sm-9">@Model.Comment</dd>
+        <dt class="col-sm-3">Creado</dt>
+        <dd class="col-sm-9">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+    </dl>
+</main>

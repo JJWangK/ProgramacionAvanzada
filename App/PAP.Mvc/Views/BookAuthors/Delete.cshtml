@@ -1,0 +1,27 @@
+﻿@model PAP.Models.BookAuthor
+
+@{
+    ViewBag.Title = "Eliminar relación libro-autor";
+}
+
+<main>
+    <h1 class="h2 mb-4">Eliminar relación libro-autor</h1>
+
+    <div class="alert alert-warning" role="alert">
+        ¿Está seguro de eliminar esta relación?
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Libro</dt>
+        <dd class="col-sm-9">@Model.BookTitle</dd>
+        <dt class="col-sm-3">Autor</dt>
+        <dd class="col-sm-9">@Model.AuthorName</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "BookAuthors", new { bookId = Model.BookId, authorId = Model.AuthorId }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-outline-secondary" })
+    }
+</main>

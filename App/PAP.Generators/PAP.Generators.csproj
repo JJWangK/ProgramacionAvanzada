@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A811FCDF-04AB-4A98-8C6C-2A8B6CA6600A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAP.Generators</RootNamespace>
+    <AssemblyName>PAP.Generators</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GeneratorBase.cs" />
+    <Compile Include="GeneratorCatalog.cs" />
+    <Compile Include="GeneratorData.cs" />
+    <Compile Include="GeneratorDependencies.cs" />
+    <Compile Include="GeneratorStatus.cs" />
+    <Compile Include="GeneratorStatusService.cs" />
+    <Compile Include="IDataGenerator.cs" />
+    <Compile Include="AddressesGenerator.cs" />
+    <Compile Include="AuthorsGenerator.cs" />
+    <Compile Include="BookAuthorsGenerator.cs" />
+    <Compile Include="BooksGenerator.cs" />
+    <Compile Include="CartItemsGenerator.cs" />
+    <Compile Include="CategoriesGenerator.cs" />
+    <Compile Include="CustomersGenerator.cs" />
+    <Compile Include="EmployeesGenerator.cs" />
+    <Compile Include="GenresGenerator.cs" />
+    <Compile Include="InventoryGenerator.cs" />
+    <Compile Include="OrderItemsGenerator.cs" />
+    <Compile Include="OrdersGenerator.cs" />
+    <Compile Include="PaymentsGenerator.cs" />
+    <Compile Include="PublishersGenerator.cs" />
+    <Compile Include="PurchaseOrderItemsGenerator.cs" />
+    <Compile Include="PurchaseOrdersGenerator.cs" />
+    <Compile Include="ReviewsGenerator.cs" />
+    <Compile Include="RolesGenerator.cs" />
+    <Compile Include="ShoppingCartsGenerator.cs" />
+    <Compile Include="SuppliersGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PAP.DataAccess\PAP.DataAccess.csproj">
+      <Project>{B9B34359-9D35-4CB6-B78A-4534016230E5}</Project>
+      <Name>PAP.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAP.Models\PAP.Models.csproj">
+      <Project>{FD2A49BA-12B1-4B7D-B59F-5BA8CA98749B}</Project>
+      <Name>PAP.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAP.Repositories\PAP.Repositories.csproj">
+      <Project>{2CFE9167-0530-473E-B3E6-749BE28634FC}</Project>
+      <Name>PAP.Repositories</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
